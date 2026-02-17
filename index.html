@@ -64,22 +64,19 @@
         }
 
         /* Language Toggle */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .lang-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1002;
             display: flex;
             background: var(--white);
             border-radius: 100px;
             padding: 4px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             border: 1px solid var(--border);
-        }
-
-        html[dir="rtl"] .lang-toggle {
-            right: auto;
-            left: 20px;
         }
 
         .lang-btn {
@@ -1195,16 +1192,6 @@
         }
 
         @media (max-width: 768px) {
-            .lang-toggle {
-                top: 12px;
-                right: 12px;
-            }
-
-            html[dir="rtl"] .lang-toggle {
-                right: auto;
-                left: 12px;
-            }
-
             nav {
                 padding: 1rem 5%;
             }
@@ -1367,19 +1354,12 @@
 
         @media (max-width: 480px) {
             .lang-toggle {
-                top: 10px;
-                right: 10px;
                 padding: 3px;
             }
 
-            html[dir="rtl"] .lang-toggle {
-                right: auto;
-                left: 10px;
-            }
-
             .lang-btn {
-                padding: 6px 12px;
-                font-size: 0.75rem;
+                padding: 6px 10px;
+                font-size: 0.7rem;
             }
 
             nav {
@@ -1391,7 +1371,7 @@
             }
 
             .preloader-text {
-                font-size: 3rem;
+                font-size: 1.5rem;
             }
 
             .hero {
@@ -1606,12 +1586,6 @@
     </style>
 </head>
 <body>
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-        <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
-        <button class="lang-btn ar" id="btn-ar" onclick="setLanguage('ar')">ع</button>
-    </div>
-
     <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-content">
@@ -1663,10 +1637,16 @@
                 </a>
             </li>
         </ul>
-        <div class="menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="nav-right">
+            <div class="lang-toggle">
+                <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn ar" id="btn-ar" onclick="setLanguage('ar')">ع</button>
+            </div>
+            <div class="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
