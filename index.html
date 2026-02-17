@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Shouq AlSufyani | Senior Sales Consultant</title>
+    <title>Shouq AlSufyani | شوق السفياني</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #1a2332;
@@ -42,6 +42,72 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* RTL Support */
+        html[dir="rtl"] body {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html[dir="rtl"] .logo,
+        html[dir="rtl"] .hero h1,
+        html[dir="rtl"] .section-title,
+        html[dir="rtl"] .about-content h3,
+        html[dir="rtl"] .timeline-title,
+        html[dir="rtl"] .skill-card h3,
+        html[dir="rtl"] .value-card h3,
+        html[dir="rtl"] .edu-card h3,
+        html[dir="rtl"] .contact-card h4,
+        html[dir="rtl"] .footer-logo,
+        html[dir="rtl"] .about-initials,
+        html[dir="rtl"] .stat-number,
+        html[dir="rtl"] .preloader-text {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1002;
+            display: flex;
+            background: var(--white);
+            border-radius: 100px;
+            padding: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+
+        html[dir="rtl"] .lang-toggle {
+            right: auto;
+            left: 20px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-light);
+        }
+
+        .lang-btn.active {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--cream);
+        }
+
+        .lang-btn.ar {
+            font-family: 'Tajawal', sans-serif;
+        }
+
         /* Preloader */
         .preloader {
             position: fixed;
@@ -69,9 +135,13 @@
 
         .preloader-text {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
             font-weight: 700;
             color: var(--white);
+        }
+
+        html[dir="rtl"] .preloader-text {
+            font-family: 'Tajawal', sans-serif;
         }
 
         .preloader-text span {
@@ -143,6 +213,10 @@
             list-style: none;
         }
 
+        html[dir="rtl"] .nav-links {
+            flex-direction: row-reverse;
+        }
+
         .nav-links a {
             text-decoration: none;
             color: var(--text);
@@ -161,6 +235,11 @@
             height: 2px;
             background: var(--gold);
             transition: width 0.3s ease;
+        }
+
+        html[dir="rtl"] .nav-links a::after {
+            left: auto;
+            right: 0;
         }
 
         .nav-links a:hover {
@@ -253,6 +332,11 @@
             animation: fadeUp 0.6s ease 1.8s forwards;
         }
 
+        html[dir="rtl"] .hero h1 {
+            font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+            line-height: 1.3;
+        }
+
         .hero h1 .gold {
             color: var(--gold);
             position: relative;
@@ -268,6 +352,10 @@
             animation: fadeUp 0.6s ease 2s forwards;
         }
 
+        html[dir="rtl"] .hero-text {
+            line-height: 2;
+        }
+
         .hero-buttons {
             display: flex;
             gap: 1rem;
@@ -279,7 +367,7 @@
         .btn {
             padding: 15px 32px;
             border-radius: 10px;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
@@ -404,6 +492,10 @@
             margin-bottom: 0.75rem;
         }
 
+        html[dir="rtl"] .section-tag {
+            letter-spacing: 0;
+        }
+
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 2.75rem);
@@ -419,18 +511,23 @@
             margin: 0 auto;
         }
 
+        html[dir="rtl"] .section-desc {
+            line-height: 1.9;
+        }
+
         /* About Section */
         .about {
             background: var(--white);
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            gap: 5rem;
-            align-items: center;
-            max-width: 1200px;
+        .about-container {
+            max-width: 800px;
             margin: 0 auto;
+            text-align: center;
+        }
+
+        html[dir="rtl"] .about-container {
+            direction: rtl;
         }
 
         .about-visual {
@@ -481,10 +578,20 @@
             right: -30px;
         }
 
+        html[dir="rtl"] .floating-badge:nth-child(2) {
+            right: auto;
+            left: -30px;
+        }
+
         .floating-badge:nth-child(3) {
             bottom: -20px;
             left: -30px;
             animation-delay: 1.5s;
+        }
+
+        html[dir="rtl"] .floating-badge:nth-child(3) {
+            left: auto;
+            right: -30px;
         }
 
         @keyframes float {
@@ -512,11 +619,19 @@
             line-height: 1.3;
         }
 
+        html[dir="rtl"] .about-content h3 {
+            line-height: 1.6;
+        }
+
         .about-content p {
             color: var(--text-light);
             font-size: 1rem;
             margin-bottom: 1.25rem;
             line-height: 1.8;
+        }
+
+        html[dir="rtl"] .about-content p {
+            line-height: 2;
         }
 
         .about-tags {
@@ -564,10 +679,20 @@
             border-radius: 3px;
         }
 
+        html[dir="rtl"] .timeline::before {
+            left: auto;
+            right: 0;
+        }
+
         .timeline-item {
             padding-left: 40px;
             padding-bottom: 3rem;
             position: relative;
+        }
+
+        html[dir="rtl"] .timeline-item {
+            padding-left: 0;
+            padding-right: 40px;
         }
 
         .timeline-item:last-child {
@@ -586,6 +711,11 @@
             transition: all 0.3s ease;
         }
 
+        html[dir="rtl"] .timeline-dot {
+            left: auto;
+            right: -7px;
+        }
+
         .timeline-item:hover .timeline-dot {
             transform: scale(1.3);
             box-shadow: 0 0 0 6px rgba(201, 169, 98, 0.2);
@@ -602,6 +732,10 @@
         .timeline-content:hover {
             transform: translateX(10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+        }
+
+        html[dir="rtl"] .timeline-content:hover {
+            transform: translateX(-10px);
         }
 
         .timeline-header {
@@ -641,6 +775,10 @@
             font-size: 0.95rem;
             line-height: 1.7;
             margin-bottom: 1rem;
+        }
+
+        html[dir="rtl"] .timeline-desc {
+            line-height: 1.9;
         }
 
         .timeline-tags {
@@ -724,6 +862,10 @@
             color: var(--text-light);
             font-size: 0.875rem;
             line-height: 1.6;
+        }
+
+        html[dir="rtl"] .skill-card p {
+            line-height: 1.8;
         }
 
         /* Value Section */
@@ -811,6 +953,10 @@
             line-height: 1.7;
         }
 
+        html[dir="rtl"] .value-card p {
+            line-height: 1.9;
+        }
+
         /* Education Section */
         .education {
             background: var(--cream);
@@ -874,6 +1020,11 @@
             padding-left: 10px;
         }
 
+        html[dir="rtl"] .cert-item:hover {
+            padding-left: 0;
+            padding-right: 10px;
+        }
+
         .cert-item:last-child {
             border-bottom: none;
         }
@@ -891,6 +1042,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-light);
+            flex-shrink: 0;
         }
 
         .cert-year.ongoing {
@@ -957,6 +1109,7 @@
             color: var(--text-light);
             font-size: 0.85rem;
             word-break: break-word;
+            direction: ltr;
         }
 
         /* Footer */
@@ -982,6 +1135,20 @@
             color: rgba(255,255,255,0.6);
             font-size: 0.875rem;
         }
+
+        /* Language content visibility */
+        [data-lang-en] { display: block; }
+        [data-lang-ar] { display: none; }
+
+        html[dir="rtl"] [data-lang-en] { display: none; }
+        html[dir="rtl"] [data-lang-ar] { display: block; }
+
+        /* For inline elements */
+        span[data-lang-en], a[data-lang-en] { display: inline; }
+        span[data-lang-ar], a[data-lang-ar] { display: none; }
+
+        html[dir="rtl"] span[data-lang-en], html[dir="rtl"] a[data-lang-en] { display: none; }
+        html[dir="rtl"] span[data-lang-ar], html[dir="rtl"] a[data-lang-ar] { display: inline; }
 
         /* ==================== */
         /* MOBILE RESPONSIVE    */
@@ -1010,18 +1177,8 @@
                 justify-content: center;
             }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-visual {
-                max-width: 320px;
-                margin: 0 auto;
-            }
-
-            .floating-badge {
-                display: none;
+            .about-container {
+                padding: 0 1rem;
             }
 
             .skills-grid {
@@ -1038,6 +1195,16 @@
         }
 
         @media (max-width: 768px) {
+            .lang-toggle {
+                top: 12px;
+                right: 12px;
+            }
+
+            html[dir="rtl"] .lang-toggle {
+                right: auto;
+                left: 12px;
+            }
+
             nav {
                 padding: 1rem 5%;
             }
@@ -1058,8 +1225,19 @@
                 box-shadow: -15px 0 40px rgba(0,0,0,0.1);
             }
 
+            html[dir="rtl"] .nav-links {
+                right: auto;
+                left: -100%;
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
             .nav-links.active {
                 right: 0;
+            }
+
+            html[dir="rtl"] .nav-links.active {
+                right: auto;
+                left: 0;
             }
 
             .nav-links a {
@@ -1081,6 +1259,10 @@
 
             .hero h1 {
                 font-size: 2.25rem;
+            }
+
+            html[dir="rtl"] .hero h1 {
+                font-size: 2.5rem;
             }
 
             .hero-text {
@@ -1135,14 +1317,29 @@
                 left: 6px;
             }
 
+            html[dir="rtl"] .timeline::before {
+                left: auto;
+                right: 6px;
+            }
+
             .timeline-item {
                 padding-left: 35px;
+            }
+
+            html[dir="rtl"] .timeline-item {
+                padding-left: 0;
+                padding-right: 35px;
             }
 
             .timeline-dot {
                 left: 0;
                 width: 15px;
                 height: 15px;
+            }
+
+            html[dir="rtl"] .timeline-dot {
+                left: auto;
+                right: 0;
             }
 
             .timeline-content {
@@ -1169,6 +1366,22 @@
         }
 
         @media (max-width: 480px) {
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 3px;
+            }
+
+            html[dir="rtl"] .lang-toggle {
+                right: auto;
+                left: 10px;
+            }
+
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
             nav {
                 padding: 0.875rem 4%;
             }
@@ -1192,6 +1405,10 @@
 
             .hero h1 {
                 font-size: 1.85rem;
+            }
+
+            html[dir="rtl"] .hero h1 {
+                font-size: 2rem;
             }
 
             .hero-text {
@@ -1256,6 +1473,10 @@
                 align-items: flex-start;
             }
 
+            html[dir="rtl"] .timeline-header {
+                align-items: flex-end;
+            }
+
             .timeline-title {
                 font-size: 1.1rem;
             }
@@ -1295,6 +1516,10 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
+            }
+
+            html[dir="rtl"] .cert-item {
+                align-items: flex-end;
             }
 
             .contact-card {
@@ -1345,6 +1570,11 @@
             .nav-links {
                 padding-right: env(safe-area-inset-right);
             }
+
+            html[dir="rtl"] .nav-links {
+                padding-right: 0;
+                padding-left: env(safe-area-inset-left);
+            }
         }
 
         /* Reduce motion for accessibility */
@@ -1376,10 +1606,19 @@
     </style>
 </head>
 <body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn ar" id="btn-ar" onclick="setLanguage('ar')">ع</button>
+    </div>
+
     <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-content">
-            <div class="preloader-text">S<span>A</span></div>
+            <div class="preloader-text">
+                <span data-lang-en>Shouq <span>AlSufyani</span></span>
+                <span data-lang-ar>شوق <span>السفياني</span></span>
+            </div>
             <div class="preloader-bar">
                 <div class="preloader-progress"></div>
             </div>
@@ -1388,13 +1627,41 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#" class="logo">Shouq<span>.</span></a>
+        <a href="#" class="logo">
+            <span data-lang-en>Shouq<span>.</span></span>
+            <span data-lang-ar>شوق<span>.</span></span>
+        </a>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li>
+                <a href="#about">
+                    <span data-lang-en>About</span>
+                    <span data-lang-ar>نبذة عني</span>
+                </a>
+            </li>
+            <li>
+                <a href="#experience">
+                    <span data-lang-en>Experience</span>
+                    <span data-lang-ar>الخبرات</span>
+                </a>
+            </li>
+            <li>
+                <a href="#skills">
+                    <span data-lang-en>Skills</span>
+                    <span data-lang-ar>المهارات</span>
+                </a>
+            </li>
+            <li>
+                <a href="#education">
+                    <span data-lang-en>Education</span>
+                    <span data-lang-ar>التعليم</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <span data-lang-en>Contact</span>
+                    <span data-lang-ar>تواصل</span>
+                </a>
+            </li>
         </ul>
         <div class="menu-btn">
             <span></span>
@@ -1406,33 +1673,60 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-badge">Senior Sales Consultant</div>
-            <h1>Shouq <span class="gold">AlSufyani</span></h1>
-            <p class="hero-text">Driving revenue growth and building lasting client partnerships through strategic sales leadership and exceptional customer engagement.</p>
+            <div class="hero-badge">
+                <span data-lang-en>Senior Sales Consultant</span>
+                <span data-lang-ar>استشارية مبيعات أولى</span>
+            </div>
+            <h1>
+                <span data-lang-en>Shouq <span class="gold">AlSufyani</span></span>
+                <span data-lang-ar>شوق <span class="gold">السفياني</span></span>
+            </h1>
+            <p class="hero-text">
+                <span data-lang-en>Driving revenue growth and building lasting client partnerships through strategic sales leadership and exceptional customer engagement.</span>
+                <span data-lang-ar>قيادة نمو الإيرادات وبناء شراكات دائمة مع العملاء من خلال القيادة الاستراتيجية للمبيعات والتفاعل المتميز مع العملاء.</span>
+            </p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#experience" class="btn btn-secondary">View Experience</a>
+                <a href="#contact" class="btn btn-primary">
+                    <span data-lang-en>Get In Touch</span>
+                    <span data-lang-ar>تواصل معي</span>
+                </a>
+                <a href="#experience" class="btn btn-secondary">
+                    <span data-lang-en>View Experience</span>
+                    <span data-lang-ar>عرض الخبرات</span>
+                </a>
             </div>
         </div>
         
-        <!-- Stats Card with 4 Components -->
+        <!-- Stats Card -->
         <div class="stats-card">
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number">5<span>+</span></div>
-                    <div class="stat-label">Years Experience</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Years Experience</span>
+                        <span data-lang-ar>سنوات خبرة</span>
+                    </div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">3</div>
-                    <div class="stat-label">Global Companies</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Global Companies</span>
+                        <span data-lang-ar>شركات عالمية</span>
+                    </div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">B2B</div>
-                    <div class="stat-label">& B2C Expert</div>
+                    <div class="stat-label">
+                        <span data-lang-en>& B2C Expert</span>
+                        <span data-lang-ar>خبيرة أعمال</span>
+                    </div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">100<span>%</span></div>
-                    <div class="stat-label">Target Driven</div>
+                    <div class="stat-label">
+                        <span data-lang-en>Target Driven</span>
+                        <span data-lang-ar>تحقيق الأهداف</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1440,30 +1734,41 @@
 
     <!-- About Section -->
     <section class="about" id="about">
-        <div class="about-grid">
-            <div class="about-visual reveal">
-                <div class="about-card">
-                    <div class="about-initials">S<span>A</span></div>
-                </div>
-                <div class="floating-badge">
-                    <div class="badge-icon">🎯</div>
-                    <span>Target Achiever</span>
-                </div>
-                <div class="floating-badge">
-                    <div class="badge-icon">📈</div>
-                    <span>Revenue Driver</span>
-                </div>
-            </div>
+        <div class="about-container">
             <div class="about-content reveal">
-                <span class="section-tag">About Me</span>
-                <h3>Transforming Sales Into Strategic Partnerships</h3>
-                <p>A results-oriented sales professional with a Bachelor's degree in Finance from Umm Al-Qura University. My career journey through industry leaders like Huawei and Honor has equipped me with comprehensive expertise in enterprise sales, B2B development, and customer success.</p>
-                <p>I combine analytical thinking with relationship-building skills to drive sustainable revenue growth while ensuring exceptional client experiences at every touchpoint.</p>
+                <span class="section-tag">
+                    <span data-lang-en>About Me</span>
+                    <span data-lang-ar>نبذة عني</span>
+                </span>
+                <h3>
+                    <span data-lang-en>Transforming Sales Into Strategic Partnerships</span>
+                    <span data-lang-ar>تحويل المبيعات إلى شراكات استراتيجية</span>
+                </h3>
+                <p>
+                    <span data-lang-en>A results-oriented sales professional with a Bachelor's degree in Finance from Umm Al-Qura University. My career journey through industry leaders like Huawei and Honor has equipped me with comprehensive expertise in enterprise sales, B2B development, and customer success.</span>
+                    <span data-lang-ar>متخصصة مبيعات موجهة بالنتائج، حاصلة على درجة البكالوريوس في المالية من جامعة أم القرى. رحلتي المهنية عبر قادة الصناعة مثل هواوي وهونر زودتني بخبرة شاملة في مبيعات المؤسسات وتطوير الأعمال ونجاح العملاء.</span>
+                </p>
+                <p>
+                    <span data-lang-en>I combine analytical thinking with relationship-building skills to drive sustainable revenue growth while ensuring exceptional client experiences at every touchpoint.</span>
+                    <span data-lang-ar>أجمع بين التفكير التحليلي ومهارات بناء العلاقات لتحقيق نمو مستدام في الإيرادات مع ضمان تجارب عملاء استثنائية في كل نقطة تواصل.</span>
+                </p>
                 <div class="about-tags">
-                    <span class="about-tag">💼 Finance Graduate</span>
-                    <span class="about-tag">🤝 Client Relations</span>
-                    <span class="about-tag">📊 Sales Analytics</span>
-                    <span class="about-tag">🚀 Revenue Growth</span>
+                    <span class="about-tag">
+                        <span data-lang-en>💼 Finance Graduate</span>
+                        <span data-lang-ar>💼 خريجة مالية</span>
+                    </span>
+                    <span class="about-tag">
+                        <span data-lang-en>🤝 Client Relations</span>
+                        <span data-lang-ar>🤝 علاقات العملاء</span>
+                    </span>
+                    <span class="about-tag">
+                        <span data-lang-en>📊 Sales Analytics</span>
+                        <span data-lang-ar>📊 تحليلات المبيعات</span>
+                    </span>
+                    <span class="about-tag">
+                        <span data-lang-en>🚀 Revenue Growth</span>
+                        <span data-lang-ar>🚀 نمو الإيرادات</span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -1472,24 +1777,54 @@
     <!-- Experience Section -->
     <section class="experience" id="experience">
         <div class="section-header reveal">
-            <span class="section-tag">Career Journey</span>
-            <h2 class="section-title">Professional Experience</h2>
-            <p class="section-desc">Building expertise through progressive roles in sales leadership and operations</p>
+            <span class="section-tag">
+                <span data-lang-en>Career Journey</span>
+                <span data-lang-ar>المسيرة المهنية</span>
+            </span>
+            <h2 class="section-title">
+                <span data-lang-en>Professional Experience</span>
+                <span data-lang-ar>الخبرات المهنية</span>
+            </h2>
+            <p class="section-desc">
+                <span data-lang-en>Building expertise through progressive roles in sales leadership and operations</span>
+                <span data-lang-ar>بناء الخبرات من خلال أدوار متقدمة في قيادة المبيعات والعمليات</span>
+            </p>
         </div>
         <div class="timeline">
             <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header">
-                        <span class="timeline-date">Nov 2025 – Present</span>
-                        <span class="timeline-company">Honor Saudi Arabia</span>
+                        <span class="timeline-date">
+                            <span data-lang-en>Nov 2025 – Present</span>
+                            <span data-lang-ar>نوفمبر 2025 – الآن</span>
+                        </span>
+                        <span class="timeline-company">
+                            <span data-lang-en>Honor Saudi Arabia</span>
+                            <span data-lang-ar>هونر السعودية</span>
+                        </span>
                     </div>
-                    <h3 class="timeline-title">Senior Sales Consultant</h3>
-                    <p class="timeline-desc">Leading commercial operations through solution-based positioning and strategic revenue initiatives. Driving team performance while building lasting customer relationships.</p>
+                    <h3 class="timeline-title">
+                        <span data-lang-en>Senior Sales Consultant</span>
+                        <span data-lang-ar>استشارية مبيعات أولى</span>
+                    </h3>
+                    <p class="timeline-desc">
+                        <span data-lang-en>Leading commercial operations through solution-based positioning and strategic revenue initiatives. Driving team performance while building lasting customer relationships.</span>
+                        <span data-lang-ar>قيادة العمليات التجارية من خلال التموضع القائم على الحلول والمبادرات الاستراتيجية للإيرادات. تعزيز أداء الفريق مع بناء علاقات عملاء دائمة.</span>
+                    </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">Commercial Leadership</span>
-                        <span class="timeline-tag">Revenue Strategy</span>
-                        <span class="timeline-tag">Client Retention</span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Commercial Leadership</span>
+                            <span data-lang-ar>القيادة التجارية</span>
+                        </span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Revenue Strategy</span>
+                            <span data-lang-ar>استراتيجية الإيرادات</span>
+                        </span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Client Retention</span>
+                            <span data-lang-ar>الاحتفاظ بالعملاء</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1497,15 +1832,36 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header">
-                        <span class="timeline-date">Nov 2022 – Nov 2025</span>
-                        <span class="timeline-company">Huawei Saudi Arabia</span>
+                        <span class="timeline-date">
+                            <span data-lang-en>Nov 2022 – Nov 2025</span>
+                            <span data-lang-ar>نوفمبر 2022 – نوفمبر 2025</span>
+                        </span>
+                        <span class="timeline-company">
+                            <span data-lang-en>Huawei Saudi Arabia</span>
+                            <span data-lang-ar>هواوي السعودية</span>
+                        </span>
                     </div>
-                    <h3 class="timeline-title">Sales Consultant</h3>
-                    <p class="timeline-desc">Supported B2B sales operations and business development initiatives. Managed client relationships, prepared performance reports, and coordinated cross-functional activities.</p>
+                    <h3 class="timeline-title">
+                        <span data-lang-en>Sales Consultant</span>
+                        <span data-lang-ar>استشارية مبيعات</span>
+                    </h3>
+                    <p class="timeline-desc">
+                        <span data-lang-en>Supported B2B sales operations and business development initiatives. Managed client relationships, prepared performance reports, and coordinated cross-functional activities.</span>
+                        <span data-lang-ar>دعم عمليات مبيعات الأعمال ومبادرات تطوير الأعمال. إدارة علاقات العملاء وإعداد تقارير الأداء وتنسيق الأنشطة متعددة الوظائف.</span>
+                    </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">B2B Sales</span>
-                        <span class="timeline-tag">Lead Generation</span>
-                        <span class="timeline-tag">CRM Management</span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>B2B Sales</span>
+                            <span data-lang-ar>مبيعات الأعمال</span>
+                        </span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Lead Generation</span>
+                            <span data-lang-ar>توليد العملاء</span>
+                        </span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>CRM Management</span>
+                            <span data-lang-ar>إدارة العلاقات</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1513,15 +1869,36 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header">
-                        <span class="timeline-date">Sep 2020 – Sep 2022</span>
-                        <span class="timeline-company">Sharbatly Company</span>
+                        <span class="timeline-date">
+                            <span data-lang-en>Sep 2020 – Sep 2022</span>
+                            <span data-lang-ar>سبتمبر 2020 – سبتمبر 2022</span>
+                        </span>
+                        <span class="timeline-company">
+                            <span data-lang-en>Sharbatly Company</span>
+                            <span data-lang-ar>شركة شربتلي</span>
+                        </span>
                     </div>
-                    <h3 class="timeline-title">Operations & Performance Manager</h3>
-                    <p class="timeline-desc">Supervised daily operations and workforce activities. Coordinated with internal departments to optimize processes and track performance metrics.</p>
+                    <h3 class="timeline-title">
+                        <span data-lang-en>Operations & Performance Manager</span>
+                        <span data-lang-ar>مديرة العمليات والأداء</span>
+                    </h3>
+                    <p class="timeline-desc">
+                        <span data-lang-en>Supervised daily operations and workforce activities. Coordinated with internal departments to optimize processes and track performance metrics.</span>
+                        <span data-lang-ar>الإشراف على العمليات اليومية وأنشطة القوى العاملة. التنسيق مع الأقسام الداخلية لتحسين العمليات وتتبع مؤشرات الأداء.</span>
+                    </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">Team Leadership</span>
-                        <span class="timeline-tag">Operations</span>
-                        <span class="timeline-tag">Performance Tracking</span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Team Leadership</span>
+                            <span data-lang-ar>قيادة الفريق</span>
+                        </span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Operations</span>
+                            <span data-lang-ar>العمليات</span>
+                        </span>
+                        <span class="timeline-tag">
+                            <span data-lang-en>Performance Tracking</span>
+                            <span data-lang-ar>تتبع الأداء</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1531,40 +1908,85 @@
     <!-- Skills Section -->
     <section class="skills" id="skills">
         <div class="section-header reveal">
-            <span class="section-tag">Expertise</span>
-            <h2 class="section-title">Core Competencies</h2>
-            <p class="section-desc">Skills refined through years of hands-on experience</p>
+            <span class="section-tag">
+                <span data-lang-en>Expertise</span>
+                <span data-lang-ar>الخبرات</span>
+            </span>
+            <h2 class="section-title">
+                <span data-lang-en>Core Competencies</span>
+                <span data-lang-ar>الكفاءات الأساسية</span>
+            </h2>
+            <p class="section-desc">
+                <span data-lang-en>Skills refined through years of hands-on experience</span>
+                <span data-lang-ar>مهارات صُقلت عبر سنوات من الخبرة العملية</span>
+            </p>
         </div>
         <div class="skills-grid">
             <div class="skill-card reveal">
                 <div class="skill-icon">🎯</div>
-                <h3>Sales Excellence</h3>
-                <p>Consultative selling and consistent achievement of revenue targets</p>
+                <h3>
+                    <span data-lang-en>Sales Excellence</span>
+                    <span data-lang-ar>التميز في المبيعات</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Consultative selling and consistent achievement of revenue targets</span>
+                    <span data-lang-ar>البيع الاستشاري وتحقيق أهداف الإيرادات باستمرار</span>
+                </p>
             </div>
             <div class="skill-card reveal">
                 <div class="skill-icon">🤝</div>
-                <h3>Client Partnerships</h3>
-                <p>Building long-term relationships through trust and value delivery</p>
+                <h3>
+                    <span data-lang-en>Client Partnerships</span>
+                    <span data-lang-ar>شراكات العملاء</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Building long-term relationships through trust and value delivery</span>
+                    <span data-lang-ar>بناء علاقات طويلة الأمد من خلال الثقة وتقديم القيمة</span>
+                </p>
             </div>
             <div class="skill-card reveal">
                 <div class="skill-icon">📈</div>
-                <h3>Business Development</h3>
-                <p>B2B lead generation and strategic growth initiatives</p>
+                <h3>
+                    <span data-lang-en>Business Development</span>
+                    <span data-lang-ar>تطوير الأعمال</span>
+                </h3>
+                <p>
+                    <span data-lang-en>B2B lead generation and strategic growth initiatives</span>
+                    <span data-lang-ar>توليد العملاء المحتملين ومبادرات النمو الاستراتيجي</span>
+                </p>
             </div>
             <div class="skill-card reveal">
                 <div class="skill-icon">📊</div>
-                <h3>Analytics & Reporting</h3>
-                <p>KPI tracking and data-driven decision making</p>
+                <h3>
+                    <span data-lang-en>Analytics & Reporting</span>
+                    <span data-lang-ar>التحليلات والتقارير</span>
+                </h3>
+                <p>
+                    <span data-lang-en>KPI tracking and data-driven decision making</span>
+                    <span data-lang-ar>تتبع مؤشرات الأداء واتخاذ القرارات المبنية على البيانات</span>
+                </p>
             </div>
             <div class="skill-card reveal">
                 <div class="skill-icon">💬</div>
-                <h3>Negotiation</h3>
-                <p>Objection handling and creating win-win outcomes</p>
+                <h3>
+                    <span data-lang-en>Negotiation</span>
+                    <span data-lang-ar>التفاوض</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Objection handling and creating win-win outcomes</span>
+                    <span data-lang-ar>التعامل مع الاعتراضات وخلق نتائج مربحة للجميع</span>
+                </p>
             </div>
             <div class="skill-card reveal">
                 <div class="skill-icon">⚡</div>
-                <h3>Operations</h3>
-                <p>Team coordination and process optimization</p>
+                <h3>
+                    <span data-lang-en>Operations</span>
+                    <span data-lang-ar>العمليات</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Team coordination and process optimization</span>
+                    <span data-lang-ar>تنسيق الفريق وتحسين العمليات</span>
+                </p>
             </div>
         </div>
     </section>
@@ -1572,30 +1994,63 @@
     <!-- Value Section -->
     <section class="value" id="value">
         <div class="section-header reveal">
-            <span class="section-tag">Value Proposition</span>
-            <h2 class="section-title">Driving Client Success</h2>
-            <p class="section-desc">How I deliver strategic value through relationship-driven sales</p>
+            <span class="section-tag">
+                <span data-lang-en>Value Proposition</span>
+                <span data-lang-ar>القيمة المضافة</span>
+            </span>
+            <h2 class="section-title">
+                <span data-lang-en>Driving Client Success</span>
+                <span data-lang-ar>تحقيق نجاح العملاء</span>
+            </h2>
+            <p class="section-desc">
+                <span data-lang-en>How I deliver strategic value through relationship-driven sales</span>
+                <span data-lang-ar>كيف أقدم قيمة استراتيجية من خلال المبيعات القائمة على العلاقات</span>
+            </p>
         </div>
         <div class="value-grid">
             <div class="value-card reveal">
                 <div class="value-icon">🔄</div>
-                <h3>Client Lifecycle Management</h3>
-                <p>Managing complete customer journeys from engagement through retention, building strategic relationships that drive long-term value.</p>
+                <h3>
+                    <span data-lang-en>Client Lifecycle Management</span>
+                    <span data-lang-ar>إدارة دورة حياة العميل</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Managing complete customer journeys from engagement through retention, building strategic relationships that drive long-term value.</span>
+                    <span data-lang-ar>إدارة رحلات العملاء الكاملة من التفاعل حتى الاحتفاظ، وبناء علاقات استراتيجية تحقق قيمة طويلة الأمد.</span>
+                </p>
             </div>
             <div class="value-card reveal">
                 <div class="value-icon">📊</div>
-                <h3>Revenue Accountability</h3>
-                <p>Owning revenue targets, tracking KPIs, and delivering consistent results through data-informed strategies.</p>
+                <h3>
+                    <span data-lang-en>Revenue Accountability</span>
+                    <span data-lang-ar>المسؤولية عن الإيرادات</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Owning revenue targets, tracking KPIs, and delivering consistent results through data-informed strategies.</span>
+                    <span data-lang-ar>تحمل مسؤولية أهداف الإيرادات وتتبع مؤشرات الأداء وتحقيق نتائج متسقة من خلال استراتيجيات مبنية على البيانات.</span>
+                </p>
             </div>
             <div class="value-card reveal">
                 <div class="value-icon">🎯</div>
-                <h3>Strategic Growth</h3>
-                <p>Identifying expansion opportunities and aligning solutions with evolving client needs to maximize value.</p>
+                <h3>
+                    <span data-lang-en>Strategic Growth</span>
+                    <span data-lang-ar>النمو الاستراتيجي</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Identifying expansion opportunities and aligning solutions with evolving client needs to maximize value.</span>
+                    <span data-lang-ar>تحديد فرص التوسع ومواءمة الحلول مع احتياجات العملاء المتطورة لتعظيم القيمة.</span>
+                </p>
             </div>
             <div class="value-card reveal">
                 <div class="value-icon">🤝</div>
-                <h3>Cross-Functional Collaboration</h3>
-                <p>Coordinating with multiple departments to deliver seamless client experiences.</p>
+                <h3>
+                    <span data-lang-en>Cross-Functional Collaboration</span>
+                    <span data-lang-ar>التعاون متعدد الوظائف</span>
+                </h3>
+                <p>
+                    <span data-lang-en>Coordinating with multiple departments to deliver seamless client experiences.</span>
+                    <span data-lang-ar>التنسيق مع أقسام متعددة لتقديم تجارب عملاء سلسة.</span>
+                </p>
             </div>
         </div>
     </section>
@@ -1603,36 +2058,72 @@
     <!-- Education Section -->
     <section class="education" id="education">
         <div class="section-header reveal">
-            <span class="section-tag">Credentials</span>
-            <h2 class="section-title">Education & Certifications</h2>
+            <span class="section-tag">
+                <span data-lang-en>Credentials</span>
+                <span data-lang-ar>المؤهلات</span>
+            </span>
+            <h2 class="section-title">
+                <span data-lang-en>Education & Certifications</span>
+                <span data-lang-ar>التعليم والشهادات</span>
+            </h2>
         </div>
         <div class="edu-grid">
             <div class="edu-card reveal">
-                <h3>Bachelor of Finance</h3>
-                <p class="edu-school">Umm Al-Qura University</p>
-                <p class="edu-year">Graduated 2022 · Saudi Arabia</p>
+                <h3>
+                    <span data-lang-en>Bachelor of Finance</span>
+                    <span data-lang-ar>بكالوريوس المالية</span>
+                </h3>
+                <p class="edu-school">
+                    <span data-lang-en>Umm Al-Qura University</span>
+                    <span data-lang-ar>جامعة أم القرى</span>
+                </p>
+                <p class="edu-year">
+                    <span data-lang-en>Graduated 2022 · Saudi Arabia</span>
+                    <span data-lang-ar>تخرجت 2022 · المملكة العربية السعودية</span>
+                </p>
             </div>
             <div class="edu-card reveal">
-                <h3>Professional Development</h3>
+                <h3>
+                    <span data-lang-en>Professional Development</span>
+                    <span data-lang-ar>التطوير المهني</span>
+                </h3>
                 <ul class="cert-list">
                     <li class="cert-item">
-                        <span class="cert-name">Project Management Professional (PMP)®</span>
-                        <span class="cert-year ongoing">In Progress</span>
+                        <span class="cert-name">
+                            <span data-lang-en>Project Management Professional (PMP)®</span>
+                            <span data-lang-ar>محترف إدارة المشاريع (PMP)®</span>
+                        </span>
+                        <span class="cert-year ongoing">
+                            <span data-lang-en>In Progress</span>
+                            <span data-lang-ar>قيد الدراسة</span>
+                        </span>
                     </li>
                     <li class="cert-item">
-                        <span class="cert-name">Marketing</span>
+                        <span class="cert-name">
+                            <span data-lang-en>Marketing</span>
+                            <span data-lang-ar>التسويق</span>
+                        </span>
                         <span class="cert-year">2025</span>
                     </li>
                     <li class="cert-item">
-                        <span class="cert-name">Financial Performance Management</span>
+                        <span class="cert-name">
+                            <span data-lang-en>Financial Performance Management</span>
+                            <span data-lang-ar>إدارة الأداء المالي</span>
+                        </span>
                         <span class="cert-year">2024</span>
                     </li>
                     <li class="cert-item">
-                        <span class="cert-name">Human Resources (HR)</span>
+                        <span class="cert-name">
+                            <span data-lang-en>Human Resources (HR)</span>
+                            <span data-lang-ar>الموارد البشرية</span>
+                        </span>
                         <span class="cert-year">2023</span>
                     </li>
                     <li class="cert-item">
-                        <span class="cert-name">Computer Skills</span>
+                        <span class="cert-name">
+                            <span data-lang-en>Computer Skills</span>
+                            <span data-lang-ar>مهارات الحاسب</span>
+                        </span>
                         <span class="cert-year">2023</span>
                     </li>
                 </ul>
@@ -1643,24 +2134,42 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="section-header reveal">
-            <span class="section-tag">Get In Touch</span>
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="section-desc">Open to discussing opportunities and exploring how we can create value together</p>
+            <span class="section-tag">
+                <span data-lang-en>Get In Touch</span>
+                <span data-lang-ar>تواصل معي</span>
+            </span>
+            <h2 class="section-title">
+                <span data-lang-en>Let's Connect</span>
+                <span data-lang-ar>دعونا نتواصل</span>
+            </h2>
+            <p class="section-desc">
+                <span data-lang-en>Open to discussing opportunities and exploring how we can create value together</span>
+                <span data-lang-ar>منفتحة لمناقشة الفرص واستكشاف كيف يمكننا خلق قيمة معاً</span>
+            </p>
         </div>
         <div class="contact-grid">
             <a href="mailto:ShouqAlSufyaani@gmail.com" class="contact-card reveal">
                 <div class="contact-icon">✉️</div>
-                <h4>Email</h4>
+                <h4>
+                    <span data-lang-en>Email</span>
+                    <span data-lang-ar>البريد الإلكتروني</span>
+                </h4>
                 <p>ShouqAlSufyaani@gmail.com</p>
             </a>
             <a href="tel:+966544548851" class="contact-card reveal">
                 <div class="contact-icon">📱</div>
-                <h4>Phone</h4>
+                <h4>
+                    <span data-lang-en>Phone</span>
+                    <span data-lang-ar>الجوال</span>
+                </h4>
                 <p>+966 54 454 8851</p>
             </a>
             <a href="https://linkedin.com/in/ShouqAlSufyani" target="_blank" class="contact-card reveal">
                 <div class="contact-icon">💼</div>
-                <h4>LinkedIn</h4>
+                <h4>
+                    <span data-lang-en>LinkedIn</span>
+                    <span data-lang-ar>لينكدإن</span>
+                </h4>
                 <p>/in/ShouqAlSufyani</p>
             </a>
         </div>
@@ -1668,11 +2177,44 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-logo">Shouq<span>.</span></div>
-        <p>© 2025 Shouq AlSufyani · Senior Sales Consultant · Riyadh, Saudi Arabia</p>
+        <div class="footer-logo">
+            <span data-lang-en>Shouq<span>.</span></span>
+            <span data-lang-ar>شوق<span>.</span></span>
+        </div>
+        <p>
+            <span data-lang-en>© 2025 Shouq AlSufyani · Senior Sales Consultant · Riyadh, Saudi Arabia</span>
+            <span data-lang-ar>© 2025 شوق السفياني · استشارية مبيعات أولى · الرياض، المملكة العربية السعودية</span>
+        </p>
     </footer>
 
     <script>
+        // Language switcher
+        function setLanguage(lang) {
+            var html = document.documentElement;
+            var btnEn = document.getElementById('btn-en');
+            var btnAr = document.getElementById('btn-ar');
+            
+            if (lang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+                btnAr.classList.add('active');
+                btnEn.classList.remove('active');
+                localStorage.setItem('lang', 'ar');
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+                btnEn.classList.add('active');
+                btnAr.classList.remove('active');
+                localStorage.setItem('lang', 'en');
+            }
+        }
+
+        // Check saved language preference
+        var savedLang = localStorage.getItem('lang');
+        if (savedLang) {
+            setLanguage(savedLang);
+        }
+
         // Preloader
         window.addEventListener('load', function() {
             setTimeout(function() {
@@ -1681,24 +2223,18 @@
         });
 
         // Navbar scroll effect
-        var lastScroll = 0;
         window.addEventListener('scroll', function() {
             var nav = document.querySelector('nav');
-            var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (currentScroll > 80) {
+            if (window.pageYOffset > 80) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
-            
-            lastScroll = currentScroll;
         });
 
         // Mobile menu toggle
         var menuBtn = document.querySelector('.menu-btn');
         var navLinks = document.querySelector('.nav-links');
-        var body = document.body;
 
         menuBtn.addEventListener('click', function() {
             menuBtn.classList.toggle('active');
@@ -1756,7 +2292,7 @@
             });
         }
 
-        // Add touch feedback for mobile
+        // Touch feedback for mobile
         if ('ontouchstart' in window) {
             var cards = document.querySelectorAll('.stat-item, .skill-card, .value-card, .contact-card, .timeline-content');
             for (var i = 0; i < cards.length; i++) {
