@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Shouq AlSufyani | Senior Sales Consultant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a2332;
+            --navy-light: #2d3a4f;
+            --gold: #c9a962;
+            --gold-dark: #b8943d;
+            --cream: #faf9f7;
+            --white: #ffffff;
+            --text: #374151;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--navy);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .preloader-text span {
+            color: var(--gold);
+        }
+
+        .preloader-bar {
+            width: 120px;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            margin: 1.5rem auto 0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .preloader-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--gold);
+            animation: loadProgress 1.5s ease forwards;
+        }
+
+        @keyframes loadProgress {
+            to { width: 100%; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 249, 247, 0.97);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-dark);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-btn span {
+            width: 26px;
+            height: 2px;
+            background: var(--navy);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 130px 5% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease 1.6s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: var(--navy);
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease 1.8s forwards;
+        }
+
+        .hero h1 .gold {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease 2s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease 2.2s forwards;
+        }
+
+        .btn {
+            padding: 15px 32px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-primary {
+            background: var(--navy);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(26, 35, 50, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--navy-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(26, 35, 50, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Card */
+        .stats-card {
+            background: var(--white);
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: scaleUp 0.7s ease 2.4s forwards;
+        }
+
+        @keyframes scaleUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .stat-item {
+            background: var(--cream);
+            border-radius: 18px;
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            background: var(--white);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+        }
+
+        .stat-number span {
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-card {
+            background: linear-gradient(145deg, var(--navy) 0%, var(--navy-light) 100%);
+            border-radius: 28px;
+            padding: 4rem;
+            text-align: center;
+            transition: transform 0.4s ease;
+        }
+
+        .about-card:hover {
+            transform: scale(1.02);
+        }
+
+        .about-initials {
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .about-initials span {
+            color: var(--gold);
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--white);
+            padding: 14px 20px;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--navy);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-badge:nth-child(2) {
+            top: -20px;
+            right: -30px;
+        }
+
+        .floating-badge:nth-child(3) {
+            bottom: -20px;
+            left: -30px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .badge-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-tag {
+            background: var(--cream);
+            padding: 12px 20px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--navy);
+            transition: all 0.3s ease;
+        }
+
+        .about-tag:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Experience Section */
+        .experience {
+            background: var(--cream);
+        }
+
+        .timeline {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold), var(--navy));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding-left: 40px;
+            padding-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -7px;
+            top: 8px;
+            width: 17px;
+            height: 17px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 4px solid var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 6px rgba(201, 169, 98, 0.2);
+        }
+
+        .timeline-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-date {
+            background: var(--navy);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .timeline-company {
+            color: var(--gold-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-tag {
+            background: var(--cream);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-tag:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--white);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--cream);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            cursor: default;
+        }
+
+        .skill-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(201, 169, 98, 0.15);
+        }
+
+        .skill-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 1.75rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .skill-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Value Section */
+        .value {
+            background: var(--navy);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 169, 98, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .value .section-tag {
+            color: var(--gold);
+        }
+
+        .value .section-title {
+            color: var(--white);
+        }
+
+        .value .section-desc {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 2.25rem;
+            transition: all 0.4s ease;
+        }
+
+        .value-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-8px);
+            border-color: var(--gold);
+        }
+
+        .value-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            margin-bottom: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+        }
+
+        .value-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .value-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Education Section */
+        .education {
+            background: var(--cream);
+        }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .edu-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+        }
+
+        .edu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+        }
+
+        .edu-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-school {
+            color: var(--gold-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-year {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .cert-list {
+            list-style: none;
+        }
+
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            padding-left: 10px;
+        }
+
+        .cert-item:last-child {
+            border-bottom: none;
+        }
+
+        .cert-name {
+            font-weight: 500;
+            color: var(--navy);
+            font-size: 0.9rem;
+        }
+
+        .cert-year {
+            background: var(--cream);
+            padding: 5px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .cert-year.ongoing {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--cream);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+        }
+
+        .contact-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(201, 169, 98, 0.15);
+        }
+
+        .contact-icon {
+            width: 65px;
+            height: 65px;
+            background: var(--white);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.15);
+        }
+
+        .contact-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            word-break: break-word;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            padding: 3.5rem 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--gold);
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+        }
+
+        /* ==================== */
+        /* MOBILE RESPONSIVE    */
+        /* ==================== */
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding-top: 120px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                order: 1;
+            }
+
+            .stats-card {
+                order: 2;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-visual {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .floating-badge {
+                display: none;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .edu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                height: -webkit-fill-available;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -15px 0 40px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .hero {
+                padding: 110px 5% 60px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero-text {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 16px 28px;
+            }
+
+            .stats-card {
+                padding: 1.75rem;
+                max-width: 100%;
+            }
+
+            .stats-grid {
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1.25rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 2.25rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+
+            .about-card {
+                padding: 3rem;
+            }
+
+            .about-initials {
+                font-size: 5rem;
+            }
+
+            .timeline::before {
+                left: 6px;
+            }
+
+            .timeline-item {
+                padding-left: 35px;
+            }
+
+            .timeline-dot {
+                left: 0;
+                width: 15px;
+                height: 15px;
+            }
+
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+            .timeline-title {
+                font-size: 1.2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .skill-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.875rem 4%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .preloader-text {
+                font-size: 3rem;
+            }
+
+            .hero {
+                padding: 100px 4% 50px;
+            }
+
+            .hero-badge {
+                font-size: 0.7rem;
+                padding: 8px 14px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-text {
+                font-size: 0.95rem;
+            }
+
+            .stats-card {
+                padding: 1.25rem;
+                border-radius: 20px;
+            }
+
+            .stat-item {
+                padding: 1rem 0.75rem;
+                border-radius: 14px;
+            }
+
+            .stat-number {
+                font-size: 1.85rem;
+            }
+
+            .stat-label {
+                font-size: 0.7rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .section-desc {
+                font-size: 0.95rem;
+            }
+
+            .about-card {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+
+            .about-initials {
+                font-size: 4rem;
+            }
+
+            .about-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .about-tags {
+                gap: 0.5rem;
+            }
+
+            .about-tag {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+            }
+
+            .timeline-content {
+                padding: 1.25rem;
+                border-radius: 16px;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-title {
+                font-size: 1.1rem;
+            }
+
+            .timeline-desc {
+                font-size: 0.9rem;
+            }
+
+            .skill-card {
+                padding: 1.75rem 1.25rem;
+                border-radius: 18px;
+            }
+
+            .skill-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .value-card {
+                padding: 1.75rem;
+                border-radius: 18px;
+            }
+
+            .value-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
+            }
+
+            .edu-card {
+                padding: 1.75rem;
+                border-radius: 18px;
+            }
+
+            .cert-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .contact-card {
+                padding: 2rem 1.5rem;
+                border-radius: 18px;
+            }
+
+            .contact-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+
+            footer {
+                padding: 2.5rem 4%;
+            }
+
+            .footer-logo {
+                font-size: 1.4rem;
+            }
+
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* iOS Safe Area Support */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+
+            nav {
+                padding-left: max(5%, env(safe-area-inset-left));
+                padding-right: max(5%, env(safe-area-inset-right));
+            }
+
+            section {
+                padding-left: max(5%, env(safe-area-inset-left));
+                padding-right: max(5%, env(safe-area-inset-right));
+            }
+
+            footer {
+                padding-bottom: max(3rem, env(safe-area-inset-bottom));
+            }
+
+            .nav-links {
+                padding-right: env(safe-area-inset-right);
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .preloader {
+                display: none;
+            }
+
+            .hero-badge,
+            .hero h1,
+            .hero-text,
+            .hero-buttons,
+            .stats-card {
+                opacity: 1;
+                transform: none;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-text">S<span>A</span></div>
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Shouq<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Senior Sales Consultant</div>
+            <h1>Shouq <span class="gold">AlSufyani</span></h1>
+            <p class="hero-text">Driving revenue growth and building lasting client partnerships through strategic sales leadership and exceptional customer engagement.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#experience" class="btn btn-secondary">View Experience</a>
+            </div>
+        </div>
+        
+        <!-- Stats Card with 4 Components -->
+        <div class="stats-card">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5<span>+</span></div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Global Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">B2B</div>
+                    <div class="stat-label">& B2C Expert</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100<span>%</span></div>
+                    <div class="stat-label">Target Driven</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-visual reveal">
+                <div class="about-card">
+                    <div class="about-initials">S<span>A</span></div>
+                </div>
+                <div class="floating-badge">
+                    <div class="badge-icon">🎯</div>
+                    <span>Target Achiever</span>
+                </div>
+                <div class="floating-badge">
+                    <div class="badge-icon">📈</div>
+                    <span>Revenue Driver</span>
+                </div>
+            </div>
+            <div class="about-content reveal">
+                <span class="section-tag">About Me</span>
+                <h3>Transforming Sales Into Strategic Partnerships</h3>
+                <p>A results-oriented sales professional with a Bachelor's degree in Finance from Umm Al-Qura University. My career journey through industry leaders like Huawei and Honor has equipped me with comprehensive expertise in enterprise sales, B2B development, and customer success.</p>
+                <p>I combine analytical thinking with relationship-building skills to drive sustainable revenue growth while ensuring exceptional client experiences at every touchpoint.</p>
+                <div class="about-tags">
+                    <span class="about-tag">💼 Finance Graduate</span>
+                    <span class="about-tag">🤝 Client Relations</span>
+                    <span class="about-tag">📊 Sales Analytics</span>
+                    <span class="about-tag">🚀 Revenue Growth</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="section-header reveal">
+            <span class="section-tag">Career Journey</span>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-desc">Building expertise through progressive roles in sales leadership and operations</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-date">Nov 2025 – Present</span>
+                        <span class="timeline-company">Honor Saudi Arabia</span>
+                    </div>
+                    <h3 class="timeline-title">Senior Sales Consultant</h3>
+                    <p class="timeline-desc">Leading commercial operations through solution-based positioning and strategic revenue initiatives. Driving team performance while building lasting customer relationships.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Commercial Leadership</span>
+                        <span class="timeline-tag">Revenue Strategy</span>
+                        <span class="timeline-tag">Client Retention</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-date">Nov 2022 – Nov 2025</span>
+                        <span class="timeline-company">Huawei Saudi Arabia</span>
+                    </div>
+                    <h3 class="timeline-title">Sales Consultant</h3>
+                    <p class="timeline-desc">Supported B2B sales operations and business development initiatives. Managed client relationships, prepared performance reports, and coordinated cross-functional activities.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">B2B Sales</span>
+                        <span class="timeline-tag">Lead Generation</span>
+                        <span class="timeline-tag">CRM Management</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="timeline-date">Sep 2020 – Sep 2022</span>
+                        <span class="timeline-company">Sharbatly Company</span>
+                    </div>
+                    <h3 class="timeline-title">Operations & Performance Manager</h3>
+                    <p class="timeline-desc">Supervised daily operations and workforce activities. Coordinated with internal departments to optimize processes and track performance metrics.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Team Leadership</span>
+                        <span class="timeline-tag">Operations</span>
+                        <span class="timeline-tag">Performance Tracking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="section-header reveal">
+            <span class="section-tag">Expertise</span>
+            <h2 class="section-title">Core Competencies</h2>
+            <p class="section-desc">Skills refined through years of hands-on experience</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div class="skill-icon">🎯</div>
+                <h3>Sales Excellence</h3>
+                <p>Consultative selling and consistent achievement of revenue targets</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">🤝</div>
+                <h3>Client Partnerships</h3>
+                <p>Building long-term relationships through trust and value delivery</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">📈</div>
+                <h3>Business Development</h3>
+                <p>B2B lead generation and strategic growth initiatives</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">📊</div>
+                <h3>Analytics & Reporting</h3>
+                <p>KPI tracking and data-driven decision making</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">💬</div>
+                <h3>Negotiation</h3>
+                <p>Objection handling and creating win-win outcomes</p>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">⚡</div>
+                <h3>Operations</h3>
+                <p>Team coordination and process optimization</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section class="value" id="value">
+        <div class="section-header reveal">
+            <span class="section-tag">Value Proposition</span>
+            <h2 class="section-title">Driving Client Success</h2>
+            <p class="section-desc">How I deliver strategic value through relationship-driven sales</p>
+        </div>
+        <div class="value-grid">
+            <div class="value-card reveal">
+                <div class="value-icon">🔄</div>
+                <h3>Client Lifecycle Management</h3>
+                <p>Managing complete customer journeys from engagement through retention, building strategic relationships that drive long-term value.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">📊</div>
+                <h3>Revenue Accountability</h3>
+                <p>Owning revenue targets, tracking KPIs, and delivering consistent results through data-informed strategies.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">🎯</div>
+                <h3>Strategic Growth</h3>
+                <p>Identifying expansion opportunities and aligning solutions with evolving client needs to maximize value.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">🤝</div>
+                <h3>Cross-Functional Collaboration</h3>
+                <p>Coordinating with multiple departments to deliver seamless client experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <div class="section-header reveal">
+            <span class="section-tag">Credentials</span>
+            <h2 class="section-title">Education & Certifications</h2>
+        </div>
+        <div class="edu-grid">
+            <div class="edu-card reveal">
+                <h3>Bachelor of Finance</h3>
+                <p class="edu-school">Umm Al-Qura University</p>
+                <p class="edu-year">Graduated 2022 · Saudi Arabia</p>
+            </div>
+            <div class="edu-card reveal">
+                <h3>Professional Development</h3>
+                <ul class="cert-list">
+                    <li class="cert-item">
+                        <span class="cert-name">Project Management Professional (PMP)®</span>
+                        <span class="cert-year ongoing">In Progress</span>
+                    </li>
+                    <li class="cert-item">
+                        <span class="cert-name">Marketing</span>
+                        <span class="cert-year">2025</span>
+                    </li>
+                    <li class="cert-item">
+                        <span class="cert-name">Financial Performance Management</span>
+                        <span class="cert-year">2024</span>
+                    </li>
+                    <li class="cert-item">
+                        <span class="cert-name">Human Resources (HR)</span>
+                        <span class="cert-year">2023</span>
+                    </li>
+                    <li class="cert-item">
+                        <span class="cert-name">Computer Skills</span>
+                        <span class="cert-year">2023</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header reveal">
+            <span class="section-tag">Get In Touch</span>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="section-desc">Open to discussing opportunities and exploring how we can create value together</p>
+        </div>
+        <div class="contact-grid">
+            <a href="mailto:ShouqAlSufyaani@gmail.com" class="contact-card reveal">
+                <div class="contact-icon">✉️</div>
+                <h4>Email</h4>
+                <p>ShouqAlSufyaani@gmail.com</p>
+            </a>
+            <a href="tel:+966544548851" class="contact-card reveal">
+                <div class="contact-icon">📱</div>
+                <h4>Phone</h4>
+                <p>+966 54 454 8851</p>
+            </a>
+            <a href="https://linkedin.com/in/ShouqAlSufyani" target="_blank" class="contact-card reveal">
+                <div class="contact-icon">💼</div>
+                <h4>LinkedIn</h4>
+                <p>/in/ShouqAlSufyani</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Shouq<span>.</span></div>
+        <p>© 2025 Shouq AlSufyani · Senior Sales Consultant · Riyadh, Saudi Arabia</p>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 1800);
+        });
+
+        // Navbar scroll effect
+        var lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            var nav = document.querySelector('nav');
+            var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScroll > 80) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        var menuBtn = document.querySelector('.menu-btn');
+        var navLinks = document.querySelector('.nav-links');
+        var body = document.body;
+
+        menuBtn.addEventListener('click', function() {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        var navItems = document.querySelectorAll('.nav-links a');
+        for (var i = 0; i < navItems.length; i++) {
+            navItems[i].addEventListener('click', function() {
+                menuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            var reveals = document.querySelectorAll('.reveal');
+            var windowHeight = window.innerHeight;
+            
+            for (var i = 0; i < reveals.length; i++) {
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var revealPoint = 120;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', function() {
+            setTimeout(revealOnScroll, 100);
+        });
+
+        // Smooth scroll for anchor links
+        var anchors = document.querySelectorAll('a[href^="#"]');
+        for (var i = 0; i < anchors.length; i++) {
+            anchors[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                var target = document.querySelector(targetId);
+                if (target) {
+                    var headerOffset = 80;
+                    var elementPosition = target.getBoundingClientRect().top;
+                    var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+
+        // Add touch feedback for mobile
+        if ('ontouchstart' in window) {
+            var cards = document.querySelectorAll('.stat-item, .skill-card, .value-card, .contact-card, .timeline-content');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                cards[i].addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            }
+        }
+    </script>
+</body>
+</html>
